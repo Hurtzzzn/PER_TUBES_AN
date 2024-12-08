@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1732726176 source:d:\kuliahgena\smt 3\struktur data\tugas\tubes\main.cpp
+	"tubes.h"
+
+1732890407 source:d:\kuliahgena\smt 3\struktur data\tugas\tubes\tubes.cpp
+	"tubes.h"
+
+1732709982 d:\kuliahgena\smt 3\struktur data\tugas\tubes\tubes.h
+	<iostream>
+	<conio.h>
+	<stdlib.h>
+
