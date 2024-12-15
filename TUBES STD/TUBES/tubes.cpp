@@ -169,58 +169,64 @@ void deletePenyewa(ListPenyewa &LP, ListRelasi &LR, string id_penyewa, adrPenyew
     */
     adrPenyewa Q, precP;
     adrRelasi S, precR;
-    Q = findPenyewa(LP, id_penyewa);
     system("cls");
-    if (Q == NULL){
+    if (LP.First == NULL){
         cout << endl << "============================================================================================" << endl;
-        cout << "|*|                            DATA PENYEWA TIDAK DITEMUKAN!!                            |*|" << endl;
+        cout << "|*|                                LIST PENYEWA KOSONG!!                                 |*|" << endl;
         cout << "============================================================================================" << endl;
     } else {
-        showOneDataPenyewa(Q);
-        cout << endl << "ENTER TO NEXT... ";
-        getch();
-        system("cls");
-        S = LR.First;
-        while (S != NULL){
-            R = S;
-            S = S->nextRelasi;
-            if (R->nextPenyewa == Q){
-                showOneDataRelasi(R);
-                if (R == LR.First){
-                    deleteFirstRelasi(LR, R);
-                } else if (R->nextRelasi == NULL){
-                    deleteLastRelasi(LR, R);
-                } else {
-                    precR = LR.First;
-                    while (precR->nextRelasi != R){
-                        precR = precR->nextRelasi;
-                    }
-                    deleteAfterRelasi(LR, precR, R);
-                }
-                delete(R);
-                cout << endl << "============================================================================================" << endl;
-                cout << "|*|                            DATA RELASI BERHASIL DIHAPUS!!                            |*|" << endl;
-                cout << "============================================================================================" << endl;
-                cout << endl << "ENTER TO NEXT... ";
-                getch();
-                system("cls");
-            }
-        }
-        if (Q == LP.First){
-            deleteFirstPenyewa(LP, P);
-        } else if (Q->next == NULL){
-            deleteLastPenyewa(LP, P);
+        Q = findPenyewa(LP, id_penyewa);
+        if (Q == NULL){
+            cout << endl << "============================================================================================" << endl;
+            cout << "|*|                            DATA PENYEWA TIDAK DITEMUKAN!!                            |*|" << endl;
+            cout << "============================================================================================" << endl;
         } else {
-            precP = LP.First;
-            while (precP->next != Q){
-                precP = precP->next;
+            showOneDataPenyewa(Q);
+            cout << endl << "ENTER TO NEXT... ";
+            getch();
+            system("cls");
+            S = LR.First;
+            while (S != NULL){
+                R = S;
+                S = S->nextRelasi;
+                if (R->nextPenyewa == Q){
+                    showOneDataRelasi(R);
+                    if (R == LR.First){
+                        deleteFirstRelasi(LR, R);
+                    } else if (R->nextRelasi == NULL){
+                        deleteLastRelasi(LR, R);
+                    } else {
+                        precR = LR.First;
+                        while (precR->nextRelasi != R){
+                            precR = precR->nextRelasi;
+                        }
+                        deleteAfterRelasi(LR, precR, R);
+                    }
+                    delete(R);
+                    cout << endl << "============================================================================================" << endl;
+                    cout << "|*|                            DATA RELASI BERHASIL DIHAPUS!!                            |*|" << endl;
+                    cout << "============================================================================================" << endl;
+                    cout << endl << "ENTER TO NEXT... ";
+                    getch();
+                    system("cls");
+                }
             }
-            deleteAfterPenyewa(LP, precP, P);
+            if (Q == LP.First){
+                deleteFirstPenyewa(LP, P);
+            } else if (Q->next == NULL){
+                deleteLastPenyewa(LP, P);
+            } else {
+                precP = LP.First;
+                while (precP->next != Q){
+                    precP = precP->next;
+                }
+                deleteAfterPenyewa(LP, precP, P);
+            }
+            delete(P);
+            cout << endl << "============================================================================================" << endl;
+            cout << "|*|                            DATA PENYEWA BERHASIL DIHAPUS!                            |*|" << endl;
+            cout << "============================================================================================" << endl;
         }
-        delete(P);
-        cout << endl << "============================================================================================" << endl;
-        cout << "|*|                            DATA PENYEWA BERHASIL DIHAPUS!                            |*|" << endl;
-        cout << "============================================================================================" << endl;
     }
     cout << endl << "ENTER TO NEXT... ";
     getch();
@@ -236,61 +242,67 @@ void deleteBuku(ListBuku &LB, ListRelasi &LR, string id_buku, adrBuku &B, adrRel
     adrRelasi S, precR;
 
     system("cls");
-    Q = findBuku(LB, id_buku);
-    if (Q == NULL){
+    if (LB.First == NULL && LB.Last == NULL) {
         cout << endl << "============================================================================================" << endl;
-        cout << "|*|                              DATA BUKU TIDAK DITEMUKAN!                              |*|" << endl;
+        cout << "|*|                                LIST BUKU KOSONG!!                                    |*|" << endl;
         cout << "============================================================================================" << endl;
-    } else{
-        showOneDataBuku(Q);
-        cout << endl << "ENTER TO NEXT... ";
-        getch();
-        system("cls");
-        S = LR.First;
-        while (S != NULL)
-        {
-            R = S;
-            S = S -> nextRelasi;
-            if (R -> nextBuku == Q){
-                showOneDataRelasi(R);
-                if (R == LR.First)
-                {
-                    deleteFirstRelasi(LR, R);
-                }else if (R -> nextRelasi == NULL)
-                {
-                    deleteLastRelasi(LR, R);
-                }else {
-                    precR = LR.First;
-                    while (precR -> nextRelasi != R)
+    } else {
+        Q = findBuku(LB, id_buku);
+        if (Q == NULL){
+            cout << endl << "============================================================================================" << endl;
+            cout << "|*|                              DATA BUKU TIDAK DITEMUKAN!                              |*|" << endl;
+            cout << "============================================================================================" << endl;
+        } else{
+            showOneDataBuku(Q);
+            cout << endl << "ENTER TO NEXT... ";
+            getch();
+            system("cls");
+            S = LR.First;
+            while (S != NULL)
+            {
+                R = S;
+                S = S -> nextRelasi;
+                if (R -> nextBuku == Q){
+                    showOneDataRelasi(R);
+                    if (R == LR.First)
                     {
-                        precR = precR -> nextRelasi;
+                        deleteFirstRelasi(LR, R);
+                    }else if (R -> nextRelasi == NULL)
+                    {
+                        deleteLastRelasi(LR, R);
+                    }else {
+                        precR = LR.First;
+                        while (precR -> nextRelasi != R)
+                        {
+                            precR = precR -> nextRelasi;
+                        }
+                        deleteAfterRelasi(LR, precR, R);
                     }
-                    deleteAfterRelasi(LR, precR, R);
+                    delete(R);
+                    cout << endl << "============================================================================================" << endl;
+                    cout << "|*|                            DATA RELASI BERHASIL DIHAPUS!!                            |*|" << endl;
+                    cout << "============================================================================================" << endl;
+                    cout << endl << "ENTER TO NEXT... ";
+                    getch();
+                    system("cls");
                 }
-                delete(R);
-                cout << endl << "============================================================================================" << endl;
-                cout << "|*|                            DATA RELASI BERHASIL DIHAPUS!!                            |*|" << endl;
-                cout << "============================================================================================" << endl;
-                cout << endl << "ENTER TO NEXT... ";
-                getch();
-                system("cls");
+           }
+            if (Q == LB.First){
+                deleteFirstBuku(LB, B);
+            } else if (Q->next == NULL){
+                deleteLastBuku(LB, B);
+            } else {
+                precB = LB.First;
+                while (precB->next != Q){
+                    precB = precB->next;
+                }
+                deleteAfterBuku(LB, precB, B);
             }
-       }
-        if (Q == LB.First){
-            deleteFirstBuku(LB, B);
-        } else if (Q->next == NULL){
-            deleteLastBuku(LB, B);
-        } else {
-            precB = LB.First;
-            while (precB->next != Q){
-                precB = precB->next;
-            }
-            deleteAfterBuku(LB, precB, B);
+            delete(B);
+            cout << endl << "============================================================================================" << endl;
+            cout << "|*|                             DATA BUKU BERHASIL DIHAPUS!!                             |*|" << endl;
+            cout << "============================================================================================" << endl;
         }
-        delete(B);
-        cout << endl << "============================================================================================" << endl;
-        cout << "|*|                             DATA BUKU BERHASIL DIHAPUS!!                             |*|" << endl;
-        cout << "============================================================================================" << endl;
     }
     cout << endl << "ENTER TO NEXT... ";
     getch();
